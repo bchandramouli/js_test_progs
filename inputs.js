@@ -12,7 +12,7 @@ var property = {
 	default: 20
 }
 
-var foo= 200;
+var foo = 200;
 
 prompt.get(property, function(err, result) {
 	if (err) { return 1; }
@@ -21,7 +21,3 @@ prompt.get(property, function(err, result) {
 });
 
 console.log("Your lucky number is: " + foo/7);
-
-
-
-
