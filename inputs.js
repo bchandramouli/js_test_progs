@@ -20,5 +20,8 @@ prompt.get(property, function(err, result) {
 	foo = result.num;
 });
 
+console.log("Your lucky number is: " + foo/7);
+
+
 
 
