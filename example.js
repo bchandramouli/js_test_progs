@@ -13,3 +13,10 @@ function example() {
 }
 
 example();
+
+function example() {
+  console.log(a);
+  var a = 1;
+}
+
+example();
