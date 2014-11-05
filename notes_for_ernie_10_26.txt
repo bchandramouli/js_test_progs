@@ -1,0 +1,24 @@
+New concepts:
+1. Closures
+2. this
+    - when passed as a callback
+        - use bind
+	- inner functions cannot access the this of the outer function
+	    - closures... this and that - oh boy!
+	    - var that = this in the outer function, so the inner functions can acces it!
+	- when function using this gets assigned to a variable
+	    - use bind to associate the intended object with this, instead of the implied default (global - undefined, window etc.)
+	- borrowing methods
+	    - when you want to apply the data of another object on this objects methods, you need to reset "this". The way to do it is to use apply!
+3. apply, bind, and call
+4. Creating objects
+     - object literals - directly assign
+     - new Object(); - calls the object constructor, very basic
+     - constructor patterns - create a pattern and call new on it. Inheritance.
+5. Accessing properties:
+     - dot notation mango.color = "yellow"
+     - [] notation with property in "" -> mango["color"] = "yellow"
+     - own and inherited properties
+         - own were defined on the object
+         - inherited were obtained from the prototype's object
+         - use "in" opertor to check for properties
