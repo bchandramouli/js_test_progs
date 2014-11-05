@@ -1,0 +1,328 @@
+Tips:
+1. Node.js docs - view on a single page
+2. Node debugger - node debug <script>
+3. JSHint - like lint
+4. Traceur - 
+5. MDN - Mozilla Development Network
+      - use it to find all the methods available on an object...
+6. Lolodash - helper library...
+
+JS basics:
+1. NaN
+2. null, undefined
+3. only floats available - no integers...
+4. == - does auto type conversions, === does not. Use ===!!!
+5. Use the typeof to check for undefined!
+6. array methods - push, pop, shift, unshift...
+7. Objects - everything is an object!
+    - primitives are immutable...
+    - object keys are mutable. E.g: a = {foo: true}; b = a; a.foo = false; -> b.foo is also false!
+    - quasi dictionary + hashmap
+             - e.g var person = {
+                 firstName: "foo",
+                 lastName: "blah",
+                 id: 5
+             }
+    - This is JSON - JS Object notation...!
+
+    - Accessing properties -> person.id or person['id']
+
+    - Nested properties
+          - var person {
+              fN: "foo"
+              lN: "blah"
+              address: {
+                  number: 870
+                  street: "el camino real"
+
+              }
+          }
+    - You can add properties all the time to an object!!! Very interesting!!!
+
+      
+      Lambda function - what does it mean...
+
+      Prototype inheritance - how to do it?
+
+      ES6 has a class keyword - does function constructor correctly under the hood!
+
+8. Scope and global variables:
+    - < ES6  - only lexical scoping
+    - ES6 - let - allows scoping under a block
+
+9. IIFE: Immediately Invoked function Expression.
+    - why? - provides closure...
+    - 
+
+10. Even with in the bootsrap file - you are in a module concept so no global variables...
+
+11. Functions
+       - function name.length gives the arrity (number of args)
+       - this keyword
+            - special keyword
+            - context specific === 4 contexts can affect this
+                 - global - call a function - this is global
+                 - method - acess the property of an object - e.g. var foo = {logthis: logthis}
+                          - foo.logthis === foo => context of the object you are executing on... 
+                 - dynamic - call - look at this in detail..
+                 - constructor - new returns the 
+                 - module - module declaration defaults to exports object... what is this...
+                 - bind versus call - what is the meaning of each...
+                      - useful to prebind arguments to the function to the invocation point! Nice!
+                      - it is saving a reference to objects - so if the object changes 
+                      - during the call if you pass more args - it gets appended to the old values...
+        - apply invocation - what is this...
+        - polyfill - what is it?
+             - if something does not exist, I can make it exist... ?
+
+12. JS uses garbage collection
+        - reference counted
+        - all root based
+        - manual collection 
+
+13. Inheritance in javascript:
+        - demystifying prototypes... 
+
+14. Checkout proxy
+        - how object gets handled
+        - 
+
+
+15. harmony "code name for ES6" node --harmony passes ES6 to V8!
+
+
+Node
+   - fully event driven
+
+DOM
+   - API to represent the current state of the page
+
+Node events similar to DOM
+   - built on top of EventEmitter!
+
+
+V8 - comes with chrome devtools with a debugger
+node inherits it and it is called node-inspector - lets you debug the v8 aspect of node...
+    - npm install node-inspect
+
+node-debug is the one with the debugger...
+
+Sublime text packages - JShint, JSCS, - look at other packages - command-shift-p
+
+
+Modules search 
+    - core modules - loaded on reference
+    - load local modules - require (abs/relative module)
+    - packages - 
+         - check in curr_dir/node_modules
+         - if not keep moving recursively up the tree...
+         - keep it at the root of your project or in your specific package...
+
+NPM
+    - "npm init" to setup node_modules in the current directory...
+    - if the current directory has a package.json or a node_modules directory it puts it there, else just moves it up the chain...
+    - userland has tons of packages...
+    - npm run-script watch
+         - uses gulp!
+         - 
+    - npm set prefix
+        - global module install
+    - 
+
+semicolons - if a line starts with ( or [ - semicolon needed before it...
+
+
+modules
+    - local vs global
+        - if it executes - install them globally, else local!
+        - npm install -g for global...
+        - npm registry - has all the details for finding npm modules...
+        - nipster - npms searches and gives you with more descriptions...
+        - or just lookup on google...
+
+package.json - describes all the dependencies...
+    - dev_dependencies - you are developer working on the package - example - jshint, linters etc...
+    - usually dev_dependencies don't get installed.
+    - but if you are in the directory - you get the dev_dependencies...
+    - npm install <foo> --save-dev or --save will save the package automatically to the package.json file so you can get it right away!
+    - you can add a scripts key
+        - with test code in it to check for conditions...
+        - when you run the npm test - it parses this script with test code...
+        - you can also add a start property
+            - and be able to run npm start
+            - similarly npm stop, npm test, etc...
+        - similarly add watch
+            - you can do "watch": "gulp watch"
+            - so you can do npm watch
+    - npm publish
+        - publishes it to the npm registry, so people and can download and use!
+
+versioning
+    - semantic versioning
+         - 3 numbers - maj.min.patch
+              - patch: bug fixes
+              - min: API fixes
+              - Maj: breaks backward compatibility!
+         - semver - semver.org!!!
+         - ^ - upgrade to latest minor version
+         - ~ - upgrades to latest patch verion
+         - or u can use an exact version
+         - or >= 
+         - or 1.x.x - no lower limit...
+         - npm however gets latest!
+         - you can even specify a git repo. :)
+
+Node:
+   - stack is not maintained across asynchrnous boundaries!
+   - try catch library you can use to get longer stacks 
+       e.g let fs - require('fs')
+       . trycatch = require('trycatch')
+       trycatch.configure({'long-stack-traces': true})
+       trycatch(function() {
+           fs.readFile(__filename, function(err, data) {
+              if (err) console.log(" errror");
+              console.log("success");
+              }
+              });
+
+    - another option is process.on('uncaughtException', function(err) {
+              console.log("Caught an error");
+    });
+     setInterval(function() {
+     throw new Error('Fail.')
+     }, 1000);
+
+           }
+       })
+
+    - but best to use trycatch library - as it creates a boundary between the userland and the core...
+
+
+Nexttick is another useful module to use!
+
+EventEmitter - 
+
+Buffer 
+    - node uses it to handle binary data
+    - can handle both strings and non-strings
+    - stored outside the V8 memory context, so not restricted by it!
+    - String(data) - turns binary into string!
+
+Supports SSL! and https
+     
+path - utility library
+    - 
+
+http - http server stuff...
+
+URL - parsing and formatting!
+
+OS - 
+
+main tick
+   - callbacks that are called!
+
+Modules (lifetimer)
+   - require
+       - do all the requires upfront (blocks)
+       - all synchronous IOs
+       - keep all blocking stuff here! - example read configurations (readFileSync)
+       - use the safeGaurds library - require('safeGuards').noSynchrnousIO(module);
+   - configure
+       - example in the http create the server and set it up
+       - No IO here
+       - only do construction!
+   - initialize
+       - aysnc IO!
+       - 
+
+Asynchrony
+   - callback/error back contract
+       - first arg is err, second result
+           - don't pass both...
+       - never execute on the same tick of the event loop
+       - passed as last argument to the function
+       - return value is ignored
+       - must not throw/ must pass resulting errors
+       -  never be called more than once...
+   - use promises 
+       - the spec is very well defined!
+       - promises automattically handle error propagation
+       - 
+   - async, step - control flow libraries
+       - basically utility functions to help with asynchrony
+       - step up could be used instead of promises!
+            - enforces callback contracts
+       - 
+
+yeoman
+   - provides a web scaffolding framework for you already!
+
+Promises
+   - use a library (like Q)
+   - also if you use function generators (with yield), you can get rid of promises...
+
+
+
+Streams
+   - Very cool, just like UNIX pipes...
+   - readable and writable...
+   - process.stdin.read
+   - process.stdout.write
+   -
+
+It is a giant event loop
+   - how do I reschedule to the next tick? 
+       - control flow apis help with this...
+       - 
+
+Connect and Express
+   - connect - middleware
+       - why not http at node
+           - it is very low level
+           - no cookie handling or parsing
+           - no session support built-in
+           - connect does all the function abstraction
+           - 
+   - frameworks are super and provide foundation for collaboration
+       - reuse common patterns
+       - battle tested
+   - connects middleware
+       - router is moved into the middleware
+
+  - express and Koa are also shipping with less
+      - might be better off with Hapi???
+      - morgan is the auth framework...
+
+- look at normalize.io
+
+
+-MongoDB
+    - show databses
+    - db.threads.find() and modify
+    - query - is key, value and it will match it!
+    - 
+
+
+Build your own server with express and mongoose and do an authentican server!!!
+   - Check the output with curl loader and see what performance we get!
+   
+
+HapiJs.com
+
+
+- foreever
+   - use it to spin multiple processes!
+
+- cluster
+   - seems much better 
+       - see the sample example!!!
+
+- args and minimist use these to process argv!
+
+- spdy - what is it?
+    - https based secure protocol
+    - spdy middleware
+        - upgrades https connections to a spdy connections!
+        - require('spdy')
+        - 
