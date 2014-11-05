@@ -1,11 +1,16 @@
 var http= require("http");
 http.createServer(function (req, res) {
-	//res.setHeader(200, {"Content-Type": "text/plain"});
+	var url = "https://google.com"
+	var body = "<span>Redirecting to <a href='" + url + "'>" + url + "</a></span>";
 
-	res.write("Hello\r\n")
+	res.setHeader("Location", url);
+	res.statusCode = 302;
+	res.setHeader("Content-Length", body.length);
+	res.setHeader("Content-Type", "text/html");
+
+	res.write(body);
 
 	setTimeout(function () {
-		res.write("World\r\n");
 		res.end();
 	}, 2000);
 
