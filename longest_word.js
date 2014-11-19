@@ -1,4 +1,4 @@
-#!/usr/local/bin/node
+#!/usr/bin/env node
 
 function longest(str) {
 	var warr = str.split(" ");

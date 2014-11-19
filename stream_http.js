@@ -3,10 +3,11 @@ http.createServer(function (req, res) {
 	var url = "https://google.com"
 	var body = "<span>Redirecting to <a href='" + url + "'>" + url + "</a></span>";
 
-	res.setHeader("Location", url);
-	res.statusCode = 302;
-	res.setHeader("Content-Length", body.length);
-	res.setHeader("Content-Type", "text/html");
+	res.writeHead(302, {
+		"Location": url,
+		"Content-Length": body.length,
+		"Content-Type": "text/html"});
+
 
 	res.write(body);
 
