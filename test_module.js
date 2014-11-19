@@ -1,5 +1,5 @@
-#!/usr/bin/env/node --debug
+#!/usr/bin/env node --debug
 
-var 2square = require(./square.js)(2);
+var square_2 = require('./square.js')(2).area();
 
-console.log("square of 2 is: ", 2sqaure);
+console.log("square of 2 is: ", square_2);
