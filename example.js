@@ -1,4 +1,4 @@
-#!/usr/local/bin/node
+#!/usr/bin/env node --debug
 
 function example() {
   var o = {}, i = 0;
